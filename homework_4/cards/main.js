@@ -1,10 +1,10 @@
 const wrapper = document.querySelector(".wrapper")
 const lionKingPersons = () => {
-    const request = new XMLHttpRequest() // 1. Создание запроса
+    const request = new XMLHttpRequest() 
    // console.log(request);
-    request.open('GET', 'persons.json') // 2. Указание иетода запроса и указание пути
-    request.setRequestHeader('Content-type', 'application/json') // 3. Указание заголовков
-    request.send()   // Отправка запроса
+    request.open('GET', 'persons.json') 
+    request.setRequestHeader('Content-type', 'application/json') 
+    request.send()  
     request.addEventListener('load', () => {
         const lionKingPersons = JSON.parse(request.response)
         lionKingPersons.forEach((person) =>{
