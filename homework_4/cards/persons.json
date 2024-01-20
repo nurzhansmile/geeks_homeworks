@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Simba",
+    "age": 10,
+    "person_photo": "https://belon.club/uploads/posts/2023-08/1691090069_belon-club-p-smeshnoi-simba-oboi-instagram-17.jpg"
+  },
+  {
+    "name": "Timon",
+    "age": 28,
+    "person_photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6fJWW5424VmsfBUJ-Wh_IUS0EMuCIRq4vJQ&usqp=CAU"
+  },
+  {
+    "name": "Pumba",
+    "age": 30,
+    "person_photo": "https://i.pinimg.com/736x/99/3d/0d/993d0de021bb0ff0c1028ebf553fdbed.jpg"
+
+  },
+  {
+    "name": "Shenzi",
+    "age": 38,
+    "person_photo":"https://i.pinimg.com/originals/c0/35/cd/c035cd9abe6e2405e612ec8d1fe3d570.jpg"
+  }
+]

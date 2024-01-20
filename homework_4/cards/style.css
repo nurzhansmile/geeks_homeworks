@@ -1,0 +1,27 @@
+.personCard {
+    width: 200px;
+    padding: 20px;
+    border: 1px solid;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #f6f08b;
+}
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px
+}
+.userPhoto {
+    width: 150px;
+    height: 150px;
+    border: 1px solid;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.userPhoto img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
