@@ -63,3 +63,44 @@ tabsParent.onclick = (event) => {
 }
 
 autoSlider()
+
+// CONVERTER
+
+const somInput = document.querySelector('#som')
+const usdInput = document.querySelector('#usd')
+const eurInput = document.querySelector('#eur')
+
+const converter = (element, targetElement,targetElement2, currentValue) => {
+    element.oninput = () => {
+        const request = new XMLHttpRequest()
+        request.open('GET', '../data/converter.json')
+        request.setRequestHeader('Content-type', 'application/json')
+        request.send()
+
+        request.onload = () => {
+            const data = JSON.parse(request.response)
+            switch (currentValue) {
+                case 'som':
+                    targetElement.value = (element.value / data.usd).toFixed(2)
+                    targetElement2.value = (element.value / data.eur).toFixed(2)
+                    break
+                case 'usd':
+                    targetElement.value = (element.value * data.usd).toFixed(2)
+                    targetElement2.value = (element.value *  0.92).toFixed(2)
+                    break
+                case 'eur':
+                    targetElement.value = (element.value * data.eur).toFixed(2)
+                    targetElement2.value = (element.value * 1.09).toFixed(2)
+                    break
+                default:
+
+                    break
+            }
+            element.value === '' ? targetElement.value = '' : ''
+            element.value === '' ? targetElement2.value = '' : ''
+        }
+    }
+}
+converter(somInput, usdInput, eurInput, 'som')
+converter(usdInput, somInput, eurInput ,'usd')
+converter(eurInput, somInput, usdInput ,'eur')
