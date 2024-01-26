@@ -28,7 +28,7 @@ const hideTabContent =() => {
 }
 
 const showTabContent = (index = 0) =>{
-    tabContents[index].style.display = 'block'
+    // tabContents[index].style.display = 'block'
     tabItems[index].classList.add('tab_content_item_active')
 }
 
@@ -104,3 +104,53 @@ const converter = (element, targetElement,targetElement2, currentValue) => {
 converter(somInput, usdInput, eurInput, 'som')
 converter(usdInput, somInput, eurInput ,'usd')
 converter(eurInput, somInput, usdInput ,'eur')
+
+// CARD SWITCHER
+
+const card = document.querySelector('.card')
+const btnPrev = document.querySelector('#btn-prev')
+const btnNext = document.querySelector('#btn-next')
+
+let count = 1
+const cardFetcher = (id) => {
+    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            card.innerHTML =  `
+            <p>${data.title} </p>
+            <p style="color: ${data.completed ? 'green' : 'red'}">
+            ${data.completed}
+            </p>
+            <span>${data.id}</span>
+`
+        })
+}
+
+const showFirstCard = () => {
+    cardFetcher(1)
+}
+showFirstCard()
+
+btnNext.onclick = ()=> {
+    if (count < 200) {
+    count++
+}
+    else{
+    count = 1
+    }
+    cardFetcher(count)}
+btnPrev.onclick = ()=> {
+    if (count > 1) {
+        count--
+    }
+    else{
+        count = 200
+    }
+    cardFetcher(count)
+}
+
+// 2 задача
+
+fetch('https://jsonplaceholder.typicode.com/posts')
+.then(response => response.json())
+.then( data => console.log(data))
