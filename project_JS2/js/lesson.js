@@ -13,7 +13,8 @@ phoneButton.addEventListener('click', () => {
     }
 })
 
-// tab slider
+
+// TAB SLIDER
 
 const tabContents = document.querySelectorAll('.tab_content_block')
 const tabItems = document.querySelectorAll('.tab_content_item')
@@ -64,46 +65,48 @@ tabsParent.onclick = (event) => {
 
 autoSlider()
 
+
 // CONVERTER
 
 const somInput = document.querySelector('#som')
 const usdInput = document.querySelector('#usd')
 const eurInput = document.querySelector('#eur')
 
-const converter = (element, targetElement,targetElement2, currentValue) => {
-    element.oninput = () => {
-        const request = new XMLHttpRequest()
-        request.open('GET', '../data/converter.json')
-        request.setRequestHeader('Content-type', 'application/json')
-        request.send()
+const converter =  (element, targetElement,targetElement2, currentValue) => {
+    element.oninput = async () => {
+        try {
+            const response = await fetch('../data/converter.json')
+            const data = await response.json()
 
-        request.onload = () => {
-            const data = JSON.parse(request.response)
-            switch (currentValue) {
-                case 'som':
-                    targetElement.value = (element.value / data.usd).toFixed(2)
-                    targetElement2.value = (element.value / data.eur).toFixed(2)
-                    break
-                case 'usd':
-                    targetElement.value = (element.value * data.usd).toFixed(2)
-                    targetElement2.value = (element.value *  0.92).toFixed(2)
-                    break
-                case 'eur':
-                    targetElement.value = (element.value * data.eur).toFixed(2)
-                    targetElement2.value = (element.value * 1.09).toFixed(2)
-                    break
-                default:
+                switch (currentValue) {
+                    case 'som':
+                        targetElement.value = (element.value / data.usd).toFixed(2)
+                        targetElement2.value = (element.value / data.eur).toFixed(2)
+                        break
+                    case 'usd':
+                        targetElement.value = (element.value * data.usd).toFixed(2)
+                        targetElement2.value = (element.value * 0.92).toFixed(2)
+                        break
+                    case 'eur':
+                        targetElement.value = (element.value * data.eur).toFixed(2)
+                        targetElement2.value = (element.value * 1.09).toFixed(2)
+                        break
+                    default:
+                        break
+                }
+                element.value === '' ? targetElement.value = '' : ''
+                element.value === '' ? targetElement2.value = '' : ''
 
-                    break
-            }
-            element.value === '' ? targetElement.value = '' : ''
-            element.value === '' ? targetElement2.value = '' : ''
+        }catch (error){
+            console.log('Error', error)
         }
     }
 }
 converter(somInput, usdInput, eurInput, 'som')
 converter(usdInput, somInput, eurInput ,'usd')
 converter(eurInput, somInput, usdInput ,'eur')
+
+
 
 // CARD SWITCHER
 
@@ -112,18 +115,20 @@ const btnPrev = document.querySelector('#btn-prev')
 const btnNext = document.querySelector('#btn-next')
 
 let count = 1
-const cardFetcher = (id) => {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
-        .then(response => response.json())
-        .then(data => {
+const cardFetcher = async (id) => {
+    try{
+       const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+       const data = await response.json()
             card.innerHTML =  `
             <p>${data.title} </p>
             <p style="color: ${data.completed ? 'green' : 'red'}">
             ${data.completed}
             </p>
             <span>${data.id}</span>
-`
-        })
+     `
+    }catch (error){
+        console.log('error', error)
+    }
 }
 
 const showFirstCard = () => {
@@ -149,8 +154,27 @@ btnPrev.onclick = ()=> {
     cardFetcher(count)
 }
 
-// 2 задача
+// WEATHER
 
-fetch('https://jsonplaceholder.typicode.com/posts')
-.then(response => response.json())
-.then( data => console.log(data))
+const citySearchInput = document.querySelector('.cityName')
+const cityName = document.querySelector('.city')
+const cityTemp = document.querySelector('.temp')
+const BASE_URL = 'http://api.openweathermap.org/data/2.5/weather'
+const API_KEY = 'e417df62e04d3b1b111abeab19cea714'
+
+// query params
+const citySearch = () => {
+    citySearchInput.oninput= async (event) => {
+        try {
+            const response = await fetch(`${BASE_URL}?q=${event.target.value}&appid=${API_KEY}`)
+            // .then(response =>response.json() )
+            const data = await response.json()
+            cityName.innerHTML = data.name || 'Город не найден...'
+            cityTemp.innerHTML = data.main?.temp ? Math.round(data.main?.temp - 273) + '&deg;С' : '...'
+        }catch (error){
+            console.log('error', error)
+        }
+    }
+}
+
+citySearch()
