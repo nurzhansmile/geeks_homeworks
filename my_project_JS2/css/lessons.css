@@ -1,0 +1,128 @@
+
+/* PHONE CHECKER */
+
+.phone_block {
+    background: black;
+    padding: 100px 0;
+}
+
+.inner_phone_block {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid var(--orange);
+    height: 300px;
+    border-radius: 20px;
+    align-items: center;
+}
+
+.form_phone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form_phone button {
+    width: 100%;
+    margin: 20px 0;
+}
+
+
+/*------CARD SWITCHER------*/
+
+.card_switcher {
+    background-color: black;
+    padding: 100px 0;
+}
+
+.card {
+    width: 500px;
+    height: 300px;
+    border: 1px solid var(--orange);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-image: url(../images_main/1.jpg);
+    background-size: cover ;
+}
+h4 {
+    font-size: 15px;
+    text-align: center;
+    margin:10px;
+}
+.card p {
+    color: var(--orange);
+    font-size: 20px;
+}
+
+.card span {
+    color: white;
+    font-size: 30px;
+}
+
+.inner_card_switcher {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/*-------CONVERTER--------*/
+
+
+.converter {
+    padding: 100px 0 10px 0;
+    background-color: black;
+    margin-bottom: 0;
+}
+
+.inner_converter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.inner_converter > div {
+    display: flex;
+    flex-direction: column;
+}
+
+/*SECONDS*/
+.time {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 80px;
+    height: 100px;
+    width: 100%;
+    border-bottom: 1px solid var(--orange);
+    margin-top: 40px;
+}
+
+.time_block {
+    display: flex;
+    width: 500px;
+    justify-content: center;
+}
+
+.stopwatch {
+    padding: 10px 0 100px 0;
+    background: black;
+}
+
+.buy_buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 100px;
+}
+
